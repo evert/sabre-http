@@ -593,7 +593,24 @@ class Client extends EventEmitter
 
         return $result;
     }
-
+	
+	/**
+     * Adds Proxy to curl-call
+     *
+     * This method adds a proxy to the curl call.
+     *
+     * @param resource $curlProxyHost
+     * @param resource $curlProxyPort
+     */
+    function setCurlProxy($curlProxyHost, $curlProxyPort)
+    {
+      if (!$this->curlHandle) {
+          $this->curlHandle = curl_init();
+      }
+      curl_setopt($this->curlHandle, CURLOPT_PROXY, $curlProxyHost);
+      curl_setopt($this->curlHandle, CURLOPT_PROXYPORT, $curlProxyPort);
+    }
+	
     /**
      * Returns a bunch of information about a curl request.
      *
